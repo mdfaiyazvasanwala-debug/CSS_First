@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wildscape - Nature Blog</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            color: #20352a;
+            background: #f6f8f3;
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+        nav {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 25px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 10;
+        }
+
+        .logo {
+            color: white;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 35px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d8f0c8;
+        }
+
+        .menu-btn {
+            display: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            background:
+                linear-gradient(rgba(15, 35, 22, 0.45), rgba(15, 35, 22, 0.65)),
+                url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=1800&q=80") center/cover;
+            display: flex;
+            align-items: center;
+            padding: 0 7%;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 7px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 30px;
+            margin-bottom: 20px;
+            font-size: 13px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: clamp(45px, 7vw, 90px);
+            line-height: 1;
+            margin-bottom: 25px;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 18px;
+            color: #edf4e9;
+            margin-bottom: 35px;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            padding: 14px 25px;
+            background: white;
+            color: #20352a;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        /* INTRO */
+        .intro {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+            padding: 100px 25px 70px;
+        }
+
+        .intro span {
+            color: #6c8b5a;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 2px;
+        }
+
+        .intro h2 {
+            font-size: 42px;
+            margin: 12px 0 20px;
+        }
+
+        .intro p {
+            color: #647066;
+            font-size: 17px;
+        }
+
+        /* BLOG */
+        .blog {
+            padding: 30px 7% 100px;
+        }
+
+        .section-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            margin-bottom: 35px;
+        }
+
+        .section-heading h2 {
+            font-size: 38px;
+        }
+
+        .section-heading a {
+            color: #5c784d;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 30px rgba(31, 51, 38, 0.08);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 25px;
+        }
+
+        .category {
+            color: #769264;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            line-height: 1.3;
+            margin: 10px 0;
+        }
+
+        .card p {
+            color: #69736c;
+            font-size: 14px;
+            margin-bottom: 18px;
+        }
+
+        .read-more {
+            color: #20352a;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        /* FEATURE */
+        .feature {
+            margin: 30px 7% 100px;
+            min-height: 500px;
+            border-radius: 25px;
+            overflow: hidden;
+            background:
+                linear-gradient(90deg, rgba(15, 35, 22, .9), rgba(15, 35, 22, .2)),
+                url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80") center/cover;
+            display: flex;
+            align-items: center;
+            padding: 60px;
+            color: white;
+        }
+
+        .feature-content {
+            max-width: 550px;
+        }
+
+        .feature-content h2 {
+            font-size: 45px;
+            line-height: 1.1;
+            margin: 15px 0;
+        }
+
+        .feature-content p {
+            color: #e0e8df;
+            margin-bottom: 25px;
+        }
+
+        /* NEWSLETTER */
+        .newsletter {
+            background: #dfe9d7;
+            padding: 80px 25px;
+            text-align: center;
+        }
+
+        .newsletter h2 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .newsletter p {
+            color: #617060;
+            margin-bottom: 25px;
+        }
+
+        .newsletter form {
+            max-width: 500px;
+            margin: auto;
+            display: flex;
+            background: white;
+            padding: 6px;
+            border-radius: 40px;
+        }
+
+        .newsletter input {
+            flex: 1;
+            border: none;
+            outline: none;
+            padding: 14px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+        }
+
+        .newsletter button {
+            border: none;
+            background: #304c37;
+            color: white;
+            padding: 12px 22px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #17271d;
+            color: #dce5dc;
+            padding: 50px 7%;
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        footer h3 {
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        footer p {
+            color: #aab8ac;
+            max-width: 400px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-links a {
+            color: #c8d3c9;
+            text-decoration: none;
+        }
+
+        /* MOBILE */
+        @media (max-width: 800px) {
+
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 75px;
+                right: 7%;
+                background: #20352a;
+                padding: 20px;
+                border-radius: 12px;
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .menu-btn {
+                display: block;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+            }
+
+            .feature {
+                margin: 20px;
+                padding: 35px;
+            }
+
+            .feature-content h2 {
+                font-size: 35px;
+            }
+
+            .section-heading {
+                align-items: start;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            footer {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .hero {
+                padding: 0 25px;
+            }
+
+            .intro {
+                padding-top: 70px;
+            }
+
+            .intro h2 {
+                font-size: 32px;
+            }
+
+            .newsletter form {
+                flex-direction: column;
+                background: transparent;
+                gap: 10px;
+            }
+
+            .newsletter input,
+            .newsletter button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">WILDSCAPE</div>
+
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#stories">Stories</a></li>
+            <li><a href="#explore">Explore</a></li>
+            <li><a href="#about">About</a></li>
+        </ul>
+
+        <div class="menu-btn" onclick="toggleMenu()">☰</div>
+    </nav>
+
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <span class="tag">NATURE • TRAVEL • ADVENTURE</span>
+
+            <h1>Find your way back to nature.</h1>
+
+            <p>
+                Stories, journeys and inspiration from the wild places
+                that remind us how beautiful our planet really is.
+            </p>
+
+            <a href="#stories" class="hero-btn">
+                Explore Stories →
+            </a>
+        </div>
+    </section>
+
+
+    <!-- INTRO -->
+    <section class="intro" id="about">
+        <span>Welcome to Wildscape</span>
+
+        <h2>Stories from the wild</h2>
+
+        <p>
+            From misty mountains to quiet forests, we explore the landscapes,
+            people and experiences that make the natural world unforgettable.
+        </p>
+    </section>
+
+
+    <!-- BLOG -->
+    <section class="blog" id="stories">
+
+        <div class="section-heading">
+            <h2>Latest Stories</h2>
+            <a href="#">View all stories →</a>
+        </div>
+
+        <div class="cards">
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80"
+                        alt="Mountain landscape">
+                </div>
+
+                <div class="card-content">
+                    <span class="category">Mountains</span>
+
+                    <h3>The silence of the high mountains</h3>
+
+                    <p>
+                        Discover why escaping into the mountains can change
+                        the way we see the world.
+                    </p>
+
+                    <a href="#" class="read-more">Read story →</a>
+                </div>
+            </article>
+
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=80"
+                        alt="Green forest">
+                </div>
+
+                <div class="card-content">
+                    <span class="category">Forests</span>
+
+                    <h3>A walk beneath the ancient trees</h3>
+
+                    <p>
+                        Step into the forest and discover the calm hidden
+                        between its trees.
+                    </p>
+
+                    <a href="#" class="read-more">Read story →</a>
+                </div>
+            </article>
+
+
+            <article class="card">
+                <div class="card-image">
+                    <img src="https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80"
+                        alt="Beautiful lake">
+                </div>
+
+                <div class="card-content">
+                    <span class="category">Adventure</span>
+
+                    <h3>Finding stillness beside the lake</h3>
+
+                    <p>
+                        Sometimes the best adventures are the ones where
+                        we simply stop and listen.
+                    </p>
+
+                    <a href="#" class="read-more">Read story →</a>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
+
+    <!-- FEATURED STORY -->
+    <section class="feature" id="explore">
+
+        <div class="feature-content">
+
+            <span class="category">FEATURED JOURNEY</span>
+
+            <h2>Into the heart of the wild</h2>
+
+            <p>
+                Follow a journey through remote landscapes, winding trails
+                and breathtaking views far away from the noise of everyday life.
+            </p>
+
+            <a href="#" class="hero-btn">Read Featured Story</a>
+
+        </div>
+
+    </section>
+
+
+    <!-- NEWSLETTER -->
+    <section class="newsletter">
+
+        <h2>Stay close to nature</h2>
+
+        <p>
+            Get new stories, travel inspiration and outdoor ideas in your inbox.
+        </p>
+
+        <form id="newsletterForm">
+
+            <input type="email" id="email" placeholder="Your email address" required>
+
+            <button type="submit">Subscribe</button>
+
+        </form>
+
+        <p id="message"></p>
+
+    </section>
+
+
+    <!-- FOOTER -->
+    <footer>
+
+        <div>
+            <h3>WILDSCAPE</h3>
+
+            <p>
+                A digital journal celebrating nature, adventure
+                and the beauty of the world around us.
+            </p>
+        </div>
+
+        <div class="footer-links">
+            <a href="#">Instagram</a>
+            <a href="#">Pinterest</a>
+            <a href="#">Contact</a>
+        </div>
+
+    </footer>
+
+
+    <script>
+
+        // Mobile menu
+        function toggleMenu() {
+            document.getElementById("navLinks").classList.toggle("active");
+        }
+
+
+        // Newsletter
+        const form = document.getElementById("newsletterForm");
+        const message = document.getElementById("message");
+
+        form.addEventListener("submit", function (event) {
+
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+
+            if (email === "") {
+                message.textContent = "Please enter your email.";
+                return;
+            }
+
+            message.textContent = "Thanks for subscribing! 🌿";
+
+            form.reset();
+        });
+
+    </script>
+
+</body>
+
+</html>
